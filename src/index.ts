@@ -224,7 +224,15 @@ export function getTypeInformation(
   }
 }
 
-declare const pyodide:any;
+// link to frontend external lib
+declare const pyodide: any
+declare const languagePluginLoader: any
+
+// use this to replace print
+languagePluginLoader.then(() => {
+  // Pyodide is now ready to use...
+  console.log(pyodide.runPython(`def display(s):\n\treturn s`))
+});
 
 export async function runInContext(
   code: string,
@@ -235,8 +243,8 @@ export async function runInContext(
   context.variant = determineVariant(context, options)
   context.errors = []
 
-  console.log('code passed to backend: ');
-  console.log(code);
+  console.log('code passed to backend: ')
+  console.log(code)
   console.log('python: ')
   console.log(pyodide.runPython(code))
 
@@ -245,10 +253,8 @@ export async function runInContext(
     return resolvedErrorPromise
   }
 
-  console.log('parsed program: ');
-  console.log(program);
-
-  
+  console.log('parsed program: ')
+  console.log(program)
 
   validateAndAnnotate(program as Program, context)
   typeCheck(program, context)
@@ -265,14 +271,14 @@ export async function runInContext(
 
   const it = evaluate(program, context)
 
-  console.log('evaluated program:');
-  console.log(it);
+  console.log('evaluated program:')
+  console.log(it)
 
   const scheduler: Scheduler = new PreemptiveScheduler(theOptions.steps)
   const result = scheduler.run(it, context)
 
-  console.log('result is: ');
-  console.log(result);
+  console.log('result is: ')
+  console.log(result)
 
   // return result
   return new Promise((resolve, reject) => {
