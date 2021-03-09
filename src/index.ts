@@ -232,7 +232,7 @@ declare const languagePluginLoader: any
 languagePluginLoader.then(() => {
   // Pyodide is now ready to use...
   console.log(pyodide.runPython(`def display(s):\n\treturn s`))
-});
+})
 
 export async function runInContext(
   code: string,
