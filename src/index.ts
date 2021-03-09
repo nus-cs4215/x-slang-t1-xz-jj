@@ -25,6 +25,7 @@ import * as es from 'estree'
 import { typeCheck } from './typeChecker/typeChecker'
 import { typeToString } from './utils/stringify'
 import { PreemptiveScheduler } from './schedulers'
+// import { reject } from 'lodash'
 
 export interface IOptions {
   scheduler: 'preemptive' | 'async'
@@ -223,6 +224,8 @@ export function getTypeInformation(
   }
 }
 
+declare const pyodide:any;
+
 export async function runInContext(
   code: string,
   context: Context,
@@ -232,10 +235,21 @@ export async function runInContext(
   context.variant = determineVariant(context, options)
   context.errors = []
 
+  console.log('code passed to backend: ');
+  console.log(code);
+  console.log('python: ')
+  console.log(pyodide.runPython(code))
+
   const program = parse(code, context)
   if (!program) {
     return resolvedErrorPromise
   }
+
+  console.log('parsed program: ');
+  console.log(program);
+
+  
+
   validateAndAnnotate(program as Program, context)
   typeCheck(program, context)
   if (context.errors.length > 0) {
@@ -250,8 +264,20 @@ export async function runInContext(
   }
 
   const it = evaluate(program, context)
+
+  console.log('evaluated program:');
+  console.log(it);
+
   const scheduler: Scheduler = new PreemptiveScheduler(theOptions.steps)
-  return scheduler.run(it, context)
+  const result = scheduler.run(it, context)
+
+  console.log('result is: ');
+  console.log(result);
+
+  // return result
+  return new Promise((resolve, reject) => {
+    resolve({ status: 'finished', context, value: pyodide.runPython(code) })
+  })
 }
 
 /**
