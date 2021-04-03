@@ -264,14 +264,16 @@ export async function runInContext(
   //   sys.stdout.getvalue()`);
   // console.log(astOut);
 
-  var resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n`
-    + code + `\n`);
+  var resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n` + code + `\n`);
   var resOut1 = pyodide.runPython(`sys.stdout.getvalue()\n`);
 
+  var resOut = "";
   if (resOut0 === undefined) {
     console.log(resOut1);
+    resOut = resOut1;
   } else {
     console.log(resOut0 + "\n" + resOut1);
+    resOut1 = resOut0 + "\n" + resOut1;
   }
   
 
