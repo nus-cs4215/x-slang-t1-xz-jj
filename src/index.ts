@@ -254,42 +254,52 @@ export async function runInContext(
   context.variant = determineVariant(context, options)
   context.errors = []
 
-  // TODO: do exception handling with try-catch statements
   // TODO: add multiple variant support
 
-  console.log('code passed to backend: ')
-  console.log(code)
-
-  // get the ast
-  console.log("=== AST ===");
-  var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nsys.stdout = io.StringIO()\nprint(ast2json(ast.parse("` + code.replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `")))\nsys.stdout.getvalue()`);
-  console.log(astOut);
-
-  var resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n` + code + `\n`);
-  var resOut1 = pyodide.runPython(`sys.stdout.getvalue()\n`);
-
-  // format output here
-  console.log("=== OUTPUT ===");
-  var resOut = "";
-  if (resOut0 === undefined) {
-    console.log(resOut1);
-    resOut = resOut1;
-  } else {
-    console.log(resOut0 + resOut1);
-    resOut = resOut1 + resOut0;
-  }
-
-  if(resOut === "" ) {
-    resOut = "undefined";
-  }
+  try {
+    console.log('code passed to backend: ')
+    console.log(code)
   
-  console.log('result is: ')
-  console.log(resOut);
+    // get the ast
+    console.log("=== AST ===");
+    var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nsys.stdout = io.StringIO()\nprint(ast2json(ast.parse("` + code.replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `")))\nsys.stdout.getvalue()`);
+    console.log(astOut);
+  
+    var resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n` + code + `\n`);
+    var resOut1 = pyodide.runPython(`sys.stdout.getvalue()\n`);
+  
+    // format output here
+    console.log("=== OUTPUT ===");
+    var resOut = "";
+    if (resOut0 === undefined) {
+      console.log(resOut1);
+      resOut = resOut1;
+    } else {
+      console.log(resOut0 + resOut1);
+      resOut = resOut1 + resOut0;
+    }
+  
+    if(resOut === "" ) {
+      resOut = "undefined";
+    }
+    
+    console.log('result is: ')
+    console.log(resOut);
+  
+    return new Promise((resolve, reject) => {
+      resolve({ status: 'finished', context, value: unescape(resOut) })
+    })
 
-  return new Promise((resolve, reject) => {
-    resolve({ status: 'finished', context, value: unescape(resOut) })
-  })
+  } catch (err) {
+    console.log(err);
 
+    // temporarily treat error as "finished"
+    return new Promise((resolve, reject) => {
+      resolve({ status: 'finished', context, value: "ERROR!" })
+    })
+  }
+
+ 
   // const program = parse(code, context)
   // if (!program) {
   //   return resolvedErrorPromise
