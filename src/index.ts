@@ -254,6 +254,9 @@ export async function runInContext(
   context.variant = determineVariant(context, options)
   context.errors = []
 
+  // TODO: do exception handling with try-catch statements
+  // TODO: add multiple variant support
+
   console.log('code passed to backend: ')
   console.log(code)
 
@@ -272,24 +275,25 @@ export async function runInContext(
     console.log(resOut1);
     resOut = resOut1;
   } else {
-    console.log(resOut0 + "\n" + resOut1);
-    resOut = resOut1 + "\n" + resOut0;
+    console.log(resOut0 + resOut1);
+    resOut = resOut1 + resOut0;
+  }
+
+  if(resOut === "" ) {
+    resOut = "undefined";
   }
   
   console.log('result is: ')
   console.log(resOut);
 
-  // console.log('python: ')
-  // console.log(pyodide.runPython(code))
-
+  return new Promise((resolve, reject) => {
+    resolve({ status: 'finished', context, value: unescape(resOut) })
+  })
 
   // const program = parse(code, context)
   // if (!program) {
   //   return resolvedErrorPromise
   // }
-
-  // console.log('parsed program: ')
-  // console.log(program)
 
   // validateAndAnnotate(program as Program, context)
   // typeCheck(program, context)
@@ -304,24 +308,13 @@ export async function runInContext(
   //   return runInContext(code, context, options)
   // }
 
-  // const it = evaluate(program, context)
-
-  // console.log('evaluated program:')
-  // console.log(it)
-
   // const scheduler: Scheduler = new PreemptiveScheduler(theOptions.steps)
   // const result = scheduler.run(it, context)
-
-  // console.log('result is: ')
-  // console.log(result)
 
   // return result
   // return new Promise((resolve, reject) => {
   //   resolve({ status: 'finished', context, value: pyodide.runPython(code) })
   // })
-  return new Promise((resolve, reject) => {
-    resolve({ status: 'finished', context, value: unescape(resOut) })
-  })
 }
 
 /**

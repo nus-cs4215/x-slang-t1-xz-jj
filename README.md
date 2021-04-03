@@ -21,7 +21,7 @@ instructions, then run
 
 ``` {.}
 $ cd dist
-$ npm link
+$ npm link # yarn link instead?
 ```
 
 If you do not wish to add \"x-slang\" to your PATH, replace
