@@ -231,13 +231,13 @@ declare const languagePluginLoader: any
 // use this to replace print
 languagePluginLoader.then(() => {
   // Pyodide is now ready to use...
-  pyodide.loadPackage('micropip');
-  pyodide.runPythonAsync(`
-    import micropip
-    await micropip.install('ast2json')
+  // pyodide.loadPackage('micropip');
+  // pyodide.runPythonAsync(`
+  //   import micropip
+  //   await micropip.install('ast2json')
     
-    import ast2json
-  `);
+  //   import ast2json
+  // `);
 
   console.log("python3 loaded");
 })
@@ -255,14 +255,14 @@ export async function runInContext(
   console.log(code)
 
   // get the ast
-  var astOut = pyodide.runPython(`
-    import ast
-    import sys
-    import io
-    sys.stdout = io.StringIO()
-    print(ast2json(ast.parse("` + code + `")))
-    sys.stdout.getvalue()`);
-  console.log(astOut);
+  // var astOut = pyodide.runPython(`
+  //   import ast
+  //   import sys
+  //   import io
+  //   sys.stdout = io.StringIO()
+  //   print(ast2json(ast.parse("` + code + `")))
+  //   sys.stdout.getvalue()`);
+  // console.log(astOut);
 
   var resOut = pyodide.runPython(`
     import sys
