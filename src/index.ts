@@ -264,9 +264,16 @@ export async function runInContext(
   //   sys.stdout.getvalue()`);
   // console.log(astOut);
 
-  var resOut = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n`
-    + code + `\nsys.stdout.getvalue()\n`);
-  console.log(resOut);
+  var resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n`
+    + code + `\n`);
+  var resOut1 = pyodide.runPython(`sys.stdout.getvalue()\n`);
+
+  if (resOut0 === undefined) {
+    console.log(resOut1);
+  } else {
+    console.log(resOut0 + "\n" + resOut1);
+  }
+  
 
   // console.log('python: ')
   // console.log(pyodide.runPython(code))
