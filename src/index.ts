@@ -234,14 +234,9 @@ languagePluginLoader.then(() => {
   pyodide.loadPackage('micropip');
   pyodide.runPythonAsync(`
     import micropip
-    async def func():
-        await micropip.install('ast2json')
+    await micropip.install('ast2json')
     
-    import asyncio
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(func())
     import ast2json
-    loop.close
   `);
 
   console.log("python3 loaded");
