@@ -262,23 +262,23 @@ export async function runInContext(
     return resolvedErrorPromise
   }
 
-  if (context.prelude !== null) {
-    const prelude = context.prelude
-    context.prelude = null
-    await runInContext(prelude, context, { ...options, isPrelude: true })
-    return runInContext(code, context, options)
-  }
+  // if (context.prelude !== null) {
+  //   const prelude = context.prelude
+  //   context.prelude = null
+  //   await runInContext(prelude, context, { ...options, isPrelude: true })
+  //   return runInContext(code, context, options)
+  // }
 
-  const it = evaluate(program, context)
+  // const it = evaluate(program, context)
 
-  console.log('evaluated program:')
-  console.log(it)
+  // console.log('evaluated program:')
+  // console.log(it)
 
-  const scheduler: Scheduler = new PreemptiveScheduler(theOptions.steps)
-  const result = scheduler.run(it, context)
+  // const scheduler: Scheduler = new PreemptiveScheduler(theOptions.steps)
+  // const result = scheduler.run(it, context)
 
-  console.log('result is: ')
-  console.log(result)
+  // console.log('result is: ')
+  // console.log(result)
 
   // return result
   return new Promise((resolve, reject) => {
