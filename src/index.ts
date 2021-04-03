@@ -231,16 +231,19 @@ declare const languagePluginLoader: any
 // use this to replace print
 languagePluginLoader.then(() => {
   // Pyodide is now ready to use...
-  // pyodide.loadPackage('micropip');
-  // pyodide.runPythonAsync(`
-  //   import micropip
-  //   await micropip.install('ast2json')
-    
-  //   import ast2json
-  // `);
-
+  initPyodide();
   console.log("python3 loaded");
 })
+
+async function initPyodide() {
+  await pyodide.loadPackage('micropip');
+  await pyodide.runPythonAsync(`
+    import micropip
+    await micropip.install('ast2json')
+    
+    from ast2json import ast2json
+  `);
+}
 
 export async function runInContext(
   code: string,
@@ -255,18 +258,15 @@ export async function runInContext(
   console.log(code)
 
   // get the ast
-  // var astOut = pyodide.runPython(`
-  //   import ast
-  //   import sys
-  //   import io
-  //   sys.stdout = io.StringIO()
-  //   print(ast2json(ast.parse("` + code + `")))
-  //   sys.stdout.getvalue()`);
-  // console.log(astOut);
+  console.log("=== AST ===");
+  var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nsys.stdout = io.StringIO()\nprint(ast2json(ast.parse("` + code.replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `")))\nsys.stdout.getvalue()`);
+  console.log(astOut);
 
   var resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n` + code + `\n`);
   var resOut1 = pyodide.runPython(`sys.stdout.getvalue()\n`);
 
+  // format output here
+  console.log("=== OUTPUT ===");
   var resOut = "";
   if (resOut0 === undefined) {
     console.log(resOut1);
@@ -276,6 +276,8 @@ export async function runInContext(
     resOut = resOut1 + "\n" + resOut0;
   }
   
+  console.log('result is: ')
+  console.log(resOut);
 
   // console.log('python: ')
   // console.log(pyodide.runPython(code))
@@ -318,7 +320,7 @@ export async function runInContext(
   //   resolve({ status: 'finished', context, value: pyodide.runPython(code) })
   // })
   return new Promise((resolve, reject) => {
-    resolve({ status: 'finished', context, value: resOut })
+    resolve({ status: 'finished', context, value: unescape(resOut) })
   })
 }
 
