@@ -267,12 +267,13 @@ export async function runInContext(
   var resOut = pyodide.runPython(`
     import sys
     import io
-    sys.stdout = io.StringIO()`
+    sys.stdout = io.StringIO()\n`
     +
     code
     +
     `
-    sys.stdout.getvalue()`);
+    \n
+    sys.stdout.getvalue()\n`);
   console.log(resOut);
 
   // console.log('python: ')
