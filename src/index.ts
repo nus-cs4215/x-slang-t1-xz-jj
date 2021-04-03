@@ -3,13 +3,13 @@ import { Program, SourceLocation } from 'estree'
 import { SourceMapConsumer } from 'source-map'
 import createContext from './createContext'
 import { findDeclarationNode, findIdentifierNode } from './finder'
-import { evaluate } from './interpreter/interpreter'
+// import { evaluate } from './interpreter/interpreter'
 import { parse } from './parser/parser'
 import {
   Error as ResultError,
   ExecutionMethod,
   Finished,
-  Scheduler,
+  // Scheduler,
   SourceError,
   Context,
   Result,
@@ -24,7 +24,7 @@ export { SourceDocumentation } from './editors/ace/docTooltip'
 import * as es from 'estree'
 import { typeCheck } from './typeChecker/typeChecker'
 import { typeToString } from './utils/stringify'
-import { PreemptiveScheduler } from './schedulers'
+// import { PreemptiveScheduler } from './schedulers'
 // import { reject } from 'lodash'
 
 export interface IOptions {
@@ -37,15 +37,15 @@ export interface IOptions {
   isPrelude: boolean
 }
 
-const DEFAULT_OPTIONS: IOptions = {
-  scheduler: 'async',
-  steps: 1000,
-  stepLimit: 1000,
-  executionMethod: 'auto',
-  variant: 'calc',
-  originalMaxExecTime: 1000,
-  isPrelude: false
-}
+// const DEFAULT_OPTIONS: IOptions = {
+//   scheduler: 'async',
+//   steps: 1000,
+//   stepLimit: 1000,
+//   executionMethod: 'auto',
+//   variant: 'calc',
+//   originalMaxExecTime: 1000,
+//   isPrelude: false
+// }
 
 // needed to work on browsers
 if (typeof window !== 'undefined') {
@@ -58,7 +58,7 @@ if (typeof window !== 'undefined') {
 // deals with parsing error objects and converting them to strings (for repl at least)
 
 const verboseErrors = false
-const resolvedErrorPromise = Promise.resolve({ status: 'error' } as Result)
+// const resolvedErrorPromise = Promise.resolve({ status: 'error' } as Result)
 
 export function parseError(errors: SourceError[], verbose: boolean = verboseErrors): string {
   const errorMessagesArr = errors.map(error => {
@@ -231,7 +231,13 @@ declare const languagePluginLoader: any
 // use this to replace print
 languagePluginLoader.then(() => {
   // Pyodide is now ready to use...
-  console.log(pyodide.runPython(`def display(s):\n\treturn s`))
+  pyodide.runPython(`
+    import micropip
+    await micropip.install('ast2json')
+
+    from ast2json import ast2json
+    import ast
+  `);
 })
 
 export async function runInContext(
@@ -239,28 +245,58 @@ export async function runInContext(
   context: Context,
   options: Partial<IOptions> = {}
 ): Promise<Result> {
-  const theOptions: IOptions = { ...DEFAULT_OPTIONS, ...options }
+  // const theOptions: IOptions = { ...DEFAULT_OPTIONS, ...options }
   context.variant = determineVariant(context, options)
   context.errors = []
 
   console.log('code passed to backend: ')
   console.log(code)
-  console.log('python: ')
-  console.log(pyodide.runPython(code))
 
-  const program = parse(code, context)
-  if (!program) {
-    return resolvedErrorPromise
-  }
+  // get the ast
+  var astOut = pyodide.runPython(`
+    import sys
+    import io
+    sys.stdout = io.StringIO()
+    
+    print(ast2json(ast.parse("` + code + `")))` 
+    +
+    
+    +
+    `
+    sys.stdout.getvalue()
+    `);
+  console.log(astOut);
 
-  console.log('parsed program: ')
-  console.log(program)
+  var resOut = pyodide.runPython(`
+    import sys
+    import io
+    sys.stdout = io.StringIO()
+    `
+    +
+    code
+    +
+    `
+    sys.stdout.getvalue()
+    `);
+  console.log(resOut);
 
-  validateAndAnnotate(program as Program, context)
-  typeCheck(program, context)
-  if (context.errors.length > 0) {
-    return resolvedErrorPromise
-  }
+  // console.log('python: ')
+  // console.log(pyodide.runPython(code))
+
+
+  // const program = parse(code, context)
+  // if (!program) {
+  //   return resolvedErrorPromise
+  // }
+
+  // console.log('parsed program: ')
+  // console.log(program)
+
+  // validateAndAnnotate(program as Program, context)
+  // typeCheck(program, context)
+  // if (context.errors.length > 0) {
+  //   return resolvedErrorPromise
+  // }
 
   // if (context.prelude !== null) {
   //   const prelude = context.prelude
@@ -281,8 +317,11 @@ export async function runInContext(
   // console.log(result)
 
   // return result
+  // return new Promise((resolve, reject) => {
+  //   resolve({ status: 'finished', context, value: pyodide.runPython(code) })
+  // })
   return new Promise((resolve, reject) => {
-    resolve({ status: 'finished', context, value: pyodide.runPython(code) })
+    resolve({ status: 'finished', context, value: resOut })
   })
 }
 
