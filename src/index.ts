@@ -273,7 +273,7 @@ export async function runInContext(
     resOut = resOut1;
   } else {
     console.log(resOut0 + "\n" + resOut1);
-    resOut1 = resOut0 + "\n" + resOut1;
+    resOut = resOut0 + "\n" + resOut1;
   }
   
 
