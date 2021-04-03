@@ -233,7 +233,7 @@ languagePluginLoader.then(() => {
   // Pyodide is now ready to use...
   pyodide.runPythonAsync(`
     import micropip
-    micropip.install('ast2json')
+    await micropip.install('ast2json')
     from ast2json import ast2json
   `);
 })
