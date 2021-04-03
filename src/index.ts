@@ -236,6 +236,8 @@ languagePluginLoader.then(() => {
     await micropip.install('ast2json')
     from ast2json import ast2json
   `);
+
+  console.log("python3 loaded");
 })
 
 export async function runInContext(
