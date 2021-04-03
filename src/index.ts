@@ -256,12 +256,7 @@ export async function runInContext(
     import sys
     import io
     sys.stdout = io.StringIO()
-    
-    print(ast2json(ast.parse("` + code + `")))` 
-    +
-    
-    +
-    `
+    print(ast2json(ast.parse("` + code + `")))
     sys.stdout.getvalue()`);
   console.log(astOut);
 
