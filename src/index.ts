@@ -231,12 +231,9 @@ declare const languagePluginLoader: any
 // use this to replace print
 languagePluginLoader.then(() => {
   // Pyodide is now ready to use...
-  pyodide.runPython(`
+  pyodide.runPythonAsync(`
     import micropip
     await micropip.install('ast2json')
-
-    from ast2json import ast2json
-    import ast
   `);
 })
 
@@ -254,6 +251,8 @@ export async function runInContext(
 
   // get the ast
   var astOut = pyodide.runPython(`
+    from ast2json import ast2json
+    import ast
     import sys
     import io
     sys.stdout = io.StringIO()
