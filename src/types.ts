@@ -57,7 +57,7 @@ export interface Comment {
 }
 
 export type ExecutionMethod = 'native' | 'interpreter' | 'auto'
-export type Variant = 'calc' | 'sicpy'
+export type Variant = 'calc' | '0' | '1' | '2' | '3'  
 
 export interface SourceLanguage {
   variant: Variant
