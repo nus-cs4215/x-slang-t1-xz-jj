@@ -263,11 +263,11 @@ export async function runInContext(
     console.log(code);
 
     // verify the syntax with Antlr4
-    var syntaxErrors = verify_syntax(code.replace(/\r\n/g,'\n').replace(/\"/g, `\'`));
+    const syntaxErrors = verify_syntax(code.replace(/\r\n/g,'\n').replace(/\"/g, `\'`));
     if(syntaxErrors.length >0) {
       // there are errors
       console.log("there are syntax errors!")
-      var result = "";
+      const result = "";
       // for(var index in syntaxErrors) {
       //   result = result.concat(syntaxErrors[index] + "\n");
       // }
@@ -279,19 +279,19 @@ export async function runInContext(
   
     // get the ast
     console.log("=== AST ===");
-    var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nimport json\nsys.stdout = io.StringIO()\nprint(json.dumps(ast2json(ast.parse("` + code.replace(/\r\n/g,'\n').replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `"))))\nsys.stdout.getvalue()`);
+    const astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nimport json\nsys.stdout = io.StringIO()\nprint(json.dumps(ast2json(ast.parse("` + code.replace(/\r\n/g,'\n').replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `"))))\nsys.stdout.getvalue()`);
     console.log(astOut);
 
     // verify the ast
     console.log("=== AST VERIFY ===");
     console.log("variant: " + String(context.variant));
     
-    var verifyOut = parse_python(astOut, {'source_chapter': String(context.variant)});
+    const verifyOut = parse_python(astOut, {'source_chapter': String(context.variant)});
     console.log(verifyOut);
     console.log(typeof(verifyOut));
     
     if(Object.keys(verifyOut).length >0){
-      for(var index in verifyOut) {
+      for(const index in verifyOut) {
         var currItem = verifyOut[index];
 
         if(currItem === undefined) {
@@ -306,12 +306,12 @@ export async function runInContext(
       }
     }
     
-    var resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n` + code + `\n`);
-    var resOut1 = pyodide.runPython(`sys.stdout.getvalue()\n`);
+    const resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n` + code + `\n`);
+    const resOut1 = pyodide.runPython(`sys.stdout.getvalue()\n`);
   
     // format output here
     console.log("=== OUTPUT ===");
-    var resOut = "";
+    let resOut = "";
     if (resOut0 === undefined) {
       console.log(resOut1);
       resOut = resOut1;

@@ -8,19 +8,19 @@ import{ Python3Listener } from './Python3Listener';
 import { Python3CustomVisitor } from './Python3CustomVisitor';
        
 export function verify_syntax(program: string): any[] {
-    let input = new ANTLRInputStream(program);
-    var lexer = new Python3Lexer(input);
-    var tokens  = new CommonTokenStream(lexer);
-    var parser = new Python3Parser(tokens);
+    const input = new ANTLRInputStream(program);
+    const lexer = new Python3Lexer(input);
+    const tokens  = new CommonTokenStream(lexer);
+    const parser = new Python3Parser(tokens);
     parser.removeErrorListeners();
-    var result = []
+    const result = []
     parser.addErrorListener({
         syntaxError: (recognizer, offendingSymbol, line, column, msg, err) => {
         //   console.error(`${offendingSymbol} line ${line}, col ${column}: ${msg}`);
         result.push(`line ${line}, col ${column}: ${msg}`);
         }
     });
-    var tree = parser.single_input();   
+    const tree = parser.single_input();   
 
     console.log("=== SYNTAX VERIFIER ===");
     console.log(result);
