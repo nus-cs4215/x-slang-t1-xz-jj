@@ -6,6 +6,7 @@ import { findDeclarationNode, findIdentifierNode } from './finder'
 // import { evaluate } from './interpreter/interpreter'
 import { parse } from './parser/parser'
 import { parse_python } from './parser/parser_python'
+import { verify_syntax } from './sicpy/syntax_verifier'
 import {
   Error as ResultError,
   ExecutionMethod,
@@ -259,8 +260,22 @@ export async function runInContext(
 
   try {
     console.log('code passed to backend: ');
-    code = unescape(escape(code));
     console.log(code);
+
+    // verify the syntax with Antlr4
+    var syntaxErrors = verify_syntax(code.replace(/\r\n/g,'\n').replace(/\"/g, `\'`));
+    if(syntaxErrors.length >0) {
+      // there are errors
+      console.log("there are syntax errors!")
+      var result = "";
+      // for(var index in syntaxErrors) {
+      //   result = result.concat(syntaxErrors[index] + "\n");
+      // }
+
+      return new Promise((resolve, reject) => {
+        resolve({ status: 'finished', context, value: syntaxErrors[0] });
+      })
+    }
   
     // get the ast
     console.log("=== AST ===");
