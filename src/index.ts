@@ -241,7 +241,7 @@ async function initPyodide() {
   await pyodide.loadPackage('micropip');
   await pyodide.runPythonAsync(`
     import micropip
-    await micropip.install('ast2json')
+    await micropip.install('https://files.pythonhosted.org/packages/bd/36/e169b23043c43ee73b7604932c66cf9afd804a75b7fc2c32509a7ab23e3b/ast2json-0.2.1-py2.py3-none-any.whl')
     
     from ast2json import ast2json
   `);
