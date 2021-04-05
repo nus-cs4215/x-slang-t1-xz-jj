@@ -11,96 +11,96 @@ const rules = { '0' :
                     'FunctionType':false, 'FunctionDef':true,  'AsyncFunctionDef':false,
                     'ClassDef':false,       'Return':true,       'Delete':false,       'Assign':true,
                     'AugAssign':false,      'AnnAssign':false,    'For':false,          'AsyncFor':false,
-                    'While':true,          'If':true,           'With':false,         'AsyncWith':false,
+                    'While':false,          'If':true,           'With':false,         'AsyncWith':false,
                     'Raise':false,          'Try':false,          'Assert':false,       'Import':false,
                     'ImportFrom':false,     'Global':false,       'Nonlocal':false,     'Expr':true,
-                    'Pass':true,           'Break':false,        'Continue':false,     'BoolOp':true,
+                    'Pass':true,           'Break':true,        'Continue':true,     'BoolOp':true,
                     'NamedExpr':false,      'BinOp':true,        'UnaryOp':true,      'Lambda':false,
                     'IfExp':true,          'Dict':false,         'Set':false,          'ListComp':false,
                     'SetComp':false,        'DictComp':false,     'GeneratorExp':false, 'Await':false,
                     'Yield':false,          'YieldFrom':false,    'Compare':true,      'Call':true,
-                    'FormattedValue':false, 'JoinedStr':false,    'Constant':false,     'Attribute':false,
-                    'Subscript':false,      'Starred':false,      'Name':false,         'List':false,
+                    'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':false,
+                    'Subscript':false,      'Starred':false,      'Name':true,         'List':false,
                     'Tuple':false,          'Slice':false,        'attributes':false,   'Load':false,
                     'Store':false,          'Del':false,          'And':true,          'Or':false,
                     'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
                     'Div':false,            'Mod':false,          'Pow':false,          'LShift':false,
                     'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
-                    'FloorDiv':false,       'Invert':false,       'Not':false,          'UAdd':false,
+                    'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':false,
+                    'USub':false,           'Eq':true,           'NotEq':true,        'Lt':true,
+                    'LtE':true,             'Gt':true,           'GtE':true,          'Is':false,
+                    'IsNot':false,          'In':false,           'NotIn':false}, 
+                '1' : 
+                    {'Module':true,         'Interactive':false,  'Expression':false,
+                    'FunctionType':false, 'FunctionDef':true,  'AsyncFunctionDef':false,
+                    'ClassDef':false,       'Return':true,       'Delete':false,       'Assign':true,
+                    'AugAssign':false,      'AnnAssign':false,    'For':false,          'AsyncFor':false,
+                    'While':false,          'If':true,           'With':false,         'AsyncWith':false,
+                    'Raise':false,          'Try':false,          'Assert':false,       'Import':false,
+                    'ImportFrom':false,     'Global':false,       'Nonlocal':false,     'Expr':true,
+                    'Pass':true,           'Break':true,        'Continue':true,     'BoolOp':true,
+                    'NamedExpr':false,      'BinOp':true,        'UnaryOp':true,      'Lambda':false,
+                    'IfExp':true,          'Dict':false,         'Set':false,          'ListComp':false,
+                    'SetComp':false,        'DictComp':false,     'GeneratorExp':false, 'Await':false,
+                    'Yield':false,          'YieldFrom':false,    'Compare':true,      'Call':true,
+                    'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':false,
+                    'Subscript':false,      'Starred':false,      'Name':true,         'List':false,
+                    'Tuple':false,          'Slice':false,        'attributes':false,   'Load':false,
+                    'Store':false,          'Del':false,          'And':true,          'Or':false,
+                    'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
+                    'Div':true,            'Mod':false,          'Pow':false,          'LShift':false,
+                    'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
+                    'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':false,
+                    'USub':false,           'Eq':true,           'NotEq':true,        'Lt':true,
+                    'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
+                    'IsNot':false,          'In':false,           'NotIn':false},  
+                '2' : 
+                    {'Module':true,         'Interactive':false,  'Expression':false,
+                    'FunctionType':false, 'FunctionDef':true,  'AsyncFunctionDef':false,
+                    'ClassDef':false,       'Return':true,       'Delete':false,       'Assign':true,
+                    'AugAssign':false,      'AnnAssign':false,    'For':false,          'AsyncFor':false,
+                    'While':false,          'If':true,           'With':false,         'AsyncWith':false,
+                    'Raise':false,          'Try':false,          'Assert':false,       'Import':false,
+                    'ImportFrom':false,     'Global':false,       'Nonlocal':false,     'Expr':true,
+                    'Pass':true,           'Break':true,        'Continue':true,     'BoolOp':true,
+                    'NamedExpr':false,      'BinOp':true,        'UnaryOp':true,      'Lambda':false,
+                    'IfExp':true,          'Dict':false,         'Set':false,          'ListComp':false,
+                    'SetComp':false,        'DictComp':false,     'GeneratorExp':false, 'Await':false,
+                    'Yield':false,          'YieldFrom':false,    'Compare':true,      'Call':true,
+                    'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':false,
+                    'Subscript':false,      'Starred':false,      'Name':true,         'List':false,
+                    'Tuple':false,          'Slice':false,        'attributes':false,   'Load':false,
+                    'Store':false,          'Del':false,          'And':true,          'Or':false,
+                    'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
+                    'Div':false,            'Mod':false,          'Pow':false,          'LShift':false,
+                    'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
+                    'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':false,
                     'USub':false,           'Eq':true,           'NotEq':true,        'Lt':true,
                     'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
                     'IsNot':false,          'In':false,           'NotIn':false}, 
-                '1' : 
-                {'Module':true,         'Interactive':false,  'Expression':false,
-                'FunctionType':false, 'FunctionDef':true,  'AsyncFunctionDef':false,
-                'ClassDef':false,       'Return':true,       'Delete':false,       'Assign':true,
-                'AugAssign':false,      'AnnAssign':false,    'For':false,          'AsyncFor':false,
-                'While':true,          'If':true,           'With':false,         'AsyncWith':false,
-                'Raise':false,          'Try':false,          'Assert':false,       'Import':false,
-                'ImportFrom':false,     'Global':false,       'Nonlocal':false,     'Expr':true,
-                'Pass':true,           'Break':false,        'Continue':false,     'BoolOp':true,
-                'NamedExpr':false,      'BinOp':true,        'UnaryOp':true,      'Lambda':false,
-                'IfExp':true,          'Dict':false,         'Set':false,          'ListComp':false,
-                'SetComp':false,        'DictComp':false,     'GeneratorExp':false, 'Await':false,
-                'Yield':false,          'YieldFrom':false,    'Compare':true,      'Call':true,
-                'FormattedValue':false, 'JoinedStr':false,    'Constant':false,     'Attribute':false,
-                'Subscript':false,      'Starred':false,      'Name':false,         'List':false,
-                'Tuple':false,          'Slice':false,        'attributes':false,   'Load':false,
-                'Store':false,          'Del':false,          'And':true,          'Or':false,
-                'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
-                'Div':true,            'Mod':false,          'Pow':false,          'LShift':false,
-                'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
-                'FloorDiv':false,       'Invert':false,       'Not':false,          'UAdd':false,
-                'USub':false,           'Eq':true,           'NotEq':true,        'Lt':true,
-                'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
-                'IsNot':false,          'In':false,           'NotIn':false},  
-                '2' : 
-                    {'Module':false,         'Interactive':false,  'Expression':false,
-                    'FunctionType':false, 'FunctionDef':false,  'AsyncFunctionDef':false,
-                    'ClassDef':false,       'Return':false,       'Delete':false,       'Assign':false,
-                    'AugAssign':false,      'AnnAssign':false,    'For':false,          'AsyncFor':false,
-                    'While':false,          'If':false,           'With':false,         'AsyncWith':false,
-                    'Raise':false,          'Try':false,          'Assert':false,       'Import':false,
-                    'ImportFrom':false,     'Global':false,       'Nonlocal':false,     'Expr':false,
-                    'Pass':false,           'Break':false,        'Continue':false,     'BoolOp':false,
-                    'NamedExpr':false,      'BinOp':false,        'UnaryOp':false,      'Lambda':false,
-                    'IfExp':false,          'Dict':false,         'Set':false,          'ListComp':false,
-                    'SetComp':false,        'DictComp':false,     'GeneratorExp':false, 'Await':false,
-                    'Yield':false,          'YieldFrom':false,    'Compare':false,      'Call':false,
-                    'FormattedValue':false, 'JoinedStr':false,    'Constant':false,     'Attribute':false,
-                    'Subscript':false,      'Starred':false,      'Name':false,         'List':false,
-                    'Tuple':false,          'Slice':false,        'attributes':false,   'Load':false,
-                    'Store':false,          'Del':false,          'And':false,          'Or':false,
-                    'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
-                    'Div':false,            'Mod':false,          'Pow':false,          'LShift':false,
-                    'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
-                    'FloorDiv':false,       'Invert':false,       'Not':false,          'UAdd':false,
-                    'USub':false,           'Eq':false,           'NotEq':false,        'Lt':false,
-                    'LtE':false,            'Gt':false,           'GtE':false,          'Is':false,
-                    'IsNot':false,          'In':false,           'NotIn':false}, 
                 '3' : 
-                    {'Module':false,         'Interactive':false,  'Expression':false,
-                    'FunctionType':false, 'FunctionDef':false,  'AsyncFunctionDef':false,
-                    'ClassDef':false,       'Return':false,       'Delete':false,       'Assign':false,
-                    'AugAssign':false,      'AnnAssign':false,    'For':false,          'AsyncFor':false,
-                    'While':false,          'If':false,           'With':false,         'AsyncWith':false,
+                    {'Module':true,         'Interactive':false,  'Expression':false,
+                    'FunctionType':false, 'FunctionDef':true,  'AsyncFunctionDef':false,
+                    'ClassDef':false,       'Return':true,       'Delete':false,       'Assign':true,
+                    'AugAssign':false,      'AnnAssign':false,    'For':true,          'AsyncFor':false,
+                    'While':true,          'If':true,           'With':false,         'AsyncWith':false,
                     'Raise':false,          'Try':false,          'Assert':false,       'Import':false,
-                    'ImportFrom':false,     'Global':false,       'Nonlocal':false,     'Expr':false,
-                    'Pass':false,           'Break':false,        'Continue':false,     'BoolOp':false,
-                    'NamedExpr':false,      'BinOp':false,        'UnaryOp':false,      'Lambda':false,
-                    'IfExp':false,          'Dict':false,         'Set':false,          'ListComp':false,
+                    'ImportFrom':false,     'Global':false,       'Nonlocal':false,     'Expr':true,
+                    'Pass':true,           'Break':true,        'Continue':true,     'BoolOp':true,
+                    'NamedExpr':false,      'BinOp':true,        'UnaryOp':true,      'Lambda':false,
+                    'IfExp':true,          'Dict':false,         'Set':false,          'ListComp':false,
                     'SetComp':false,        'DictComp':false,     'GeneratorExp':false, 'Await':false,
-                    'Yield':false,          'YieldFrom':false,    'Compare':false,      'Call':false,
-                    'FormattedValue':false, 'JoinedStr':false,    'Constant':false,     'Attribute':false,
-                    'Subscript':false,      'Starred':false,      'Name':false,         'List':false,
+                    'Yield':false,          'YieldFrom':false,    'Compare':true,      'Call':true,
+                    'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':false,
+                    'Subscript':false,      'Starred':false,      'Name':true,         'List':false,
                     'Tuple':false,          'Slice':false,        'attributes':false,   'Load':false,
-                    'Store':false,          'Del':false,          'And':false,          'Or':false,
+                    'Store':false,          'Del':false,          'And':true,          'Or':false,
                     'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
                     'Div':false,            'Mod':false,          'Pow':false,          'LShift':false,
                     'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
-                    'FloorDiv':false,       'Invert':false,       'Not':false,          'UAdd':false,
-                    'USub':false,           'Eq':false,           'NotEq':false,        'Lt':false,
-                    'LtE':false,            'Gt':false,           'GtE':false,          'Is':false,
+                    'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':false,
+                    'USub':false,           'Eq':true,           'NotEq':true,        'Lt':true,
+                    'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
                     'IsNot':false,          'In':false,           'NotIn':false} }
 
                     
@@ -300,6 +300,24 @@ function IfExp_(component:JSON, context:object){
     return results
 }
 
+function Pass_(component:JSON, context:object){
+    if(!check_rules("Pass", context['source_chapter']))
+        return [{status:"no", msg:"Pass not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    return [{status:"ok", msg:"Pass", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+}
+
+function Break_(component:JSON, context:object){
+    if(!check_rules("Break", context['source_chapter']))
+        return [{status:"no", msg:"Break not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    return [{status:"ok", msg:"Break", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+}
+
+
+function Continue_(component:JSON, context:object){
+    if(!check_rules("Continue", context['source_chapter']))
+        return [{status:"no", msg:"Continue not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    return [{status:"ok", msg:"Continue", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+}
 // Compare(expr left, cmpop* ops, expr* comparators)
 function Compare_(component:JSON, context:object){
 
@@ -357,6 +375,8 @@ function Gt_(component:JSON, context:object){
         return [{status:"no", msg:"Gt not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
     return [{status:"ok", msg:"Gt", "col_offset": component['col_offset'], "lineno": component['lineno']}]
 }
+
+
 
 function GtE_(component:JSON, context:object){
     if(!check_rules("GtE", context['source_chapter']))
@@ -506,6 +526,38 @@ function Identifier_(component:JSON, context:object){
     return {status:'ok', msg:'Identifier', lineno: component['lineno'], col_offset:component['col_offset']}
 }
 
+//If(expr test, stmt* body, stmt* orelse)
+function If_(component:JSON, context:object){
+    // csl("Inside If_")
+    // csl(component);
+    //check rules
+    if(!check_rules('If', context['source_chapter'])){
+        return {status:'no', msg:'If not allowed.. yet', lineno: component['lineno'], col_offset:component['col_offset']}
+    }
+    
+    //test
+    var test = component['test'];
+    var result = []
+    result = result.concat(evaluate(test, context))
+
+    //body
+    var stmts = component['body'] 
+    for (idx in stmts){
+        var stmt = stmts[idx]
+        result = result.concat(evaluate(stmt, context))
+    } 
+
+    //orelse
+    stmts = component['orelse'] 
+    for (idx in stmts){
+        var stmt = stmts[idx]
+        result = result.concat(evaluate(stmt, context))
+    }
+
+    return result;
+}
+
+
 // Call(expr func, expr* args, keyword* keywords)
 function Call_(component:JSON, context:object){
     // csl("Inside call")
@@ -590,7 +642,7 @@ function check_rules( op:any, chapter:any){
 
 
 function not_implement(component:any, context:any){
-    console.log("Not implemented yet:" + JSON.stringify(component));
+    console.log("Component not found:" + JSON.stringify(component));
     return []
 }
 
