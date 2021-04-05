@@ -1,3 +1,4 @@
+// @ts-nocheck
 //globals
 const geval = eval
 global.check_rules = check_rules
@@ -600,7 +601,6 @@ export function parse_python(program: string, context:object) : object {
     // console.log(result)
     // console.log(JSON.stringify(tree, null, 2));
     return postprocess(result);
-
 }
 
 function postprocess(results:any): any{

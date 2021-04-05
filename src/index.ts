@@ -263,22 +263,28 @@ export async function runInContext(
   
     // get the ast
     console.log("=== AST ===");
-    var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nimport json\nsys.stdout = io.StringIO()\nprint(json.dumps(ast2json(ast.parse("` + code.replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `"))))\nsys.stdout.getvalue()`);
+    var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nimport json\nsys.stdout = io.StringIO()\nprint(json.dumps(ast2json(ast.parse("` + code.replace('/\r/g','\\r').replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `"))))\nsys.stdout.getvalue()`);
     console.log(astOut);
 
     // verify the ast
     console.log("=== AST VERIFY ===");
     var verifyOut = parse_python(astOut, {'source_chapter':'0'});
     console.log(verifyOut);
+    console.log(typeof(verifyOut));
     
-    if(verifyOut.length >0){
+    if(Object.keys(verifyOut).length >0){
       for(var index in verifyOut) {
         var currItem = verifyOut[index];
+
+        if(currItem === undefined) {
+          continue;
+        }
+
         if(currItem['status'] == 'no') {
           return new Promise((resolve, reject) => {
             resolve({ status: 'finished', context, value: currItem['msg'] });
           })
-        }
+        } 
       }
     }
     
