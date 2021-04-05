@@ -5,6 +5,7 @@ import createContext from './createContext'
 import { findDeclarationNode, findIdentifierNode } from './finder'
 // import { evaluate } from './interpreter/interpreter'
 import { parse } from './parser/parser'
+import { parse_python } from './parser/parser_python'
 import {
   Error as ResultError,
   ExecutionMethod,
@@ -262,9 +263,25 @@ export async function runInContext(
   
     // get the ast
     console.log("=== AST ===");
-    var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nsys.stdout = io.StringIO()\nprint(ast2json(ast.parse("` + code.replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `")))\nsys.stdout.getvalue()`);
+    var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nimport json\nsys.stdout = io.StringIO()\nprint(json.dumps(ast2json(ast.parse("` + code.replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `"))))\nsys.stdout.getvalue()`);
     console.log(astOut);
-  
+
+    // verify the ast
+    console.log("=== AST VERIFY ===");
+    var verifyOut = parse_python(astOut, {'source_chapter':'0'});
+    console.log(verifyOut);
+    
+    if(verifyOut.length >0){
+      for(var index in verifyOut) {
+        var currItem = verifyOut[index];
+        if(currItem['status'] == 'no') {
+          return new Promise((resolve, reject) => {
+            resolve({ status: 'finished', context, value: currItem['msg'] });
+          })
+        }
+      }
+    }
+    
     var resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n` + code + `\n`);
     var resOut1 = pyodide.runPython(`sys.stdout.getvalue()\n`);
   
