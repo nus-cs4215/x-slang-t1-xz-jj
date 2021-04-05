@@ -312,7 +312,7 @@ export async function runInContext(
 
     // temporarily treat error as "finished"
     return new Promise((resolve, reject) => {
-      resolve({ status: 'finished', context, value: "ERROR!" })
+      resolve({ status: 'finished', context, value: err.toString() })
     })
   }
 
