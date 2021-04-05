@@ -258,12 +258,13 @@ export async function runInContext(
   // TODO: add multiple variant support
 
   try {
-    console.log('code passed to backend: ')
-    console.log(code)
+    console.log('code passed to backend: ');
+    code = unescape(escape(code));
+    console.log(code);
   
     // get the ast
     console.log("=== AST ===");
-    var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nimport json\nsys.stdout = io.StringIO()\nprint(json.dumps(ast2json(ast.parse("` + code.replace('/\r/g','\\r').replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `"))))\nsys.stdout.getvalue()`);
+    var astOut = pyodide.runPython(`import ast\nimport sys\nimport io\nimport json\nsys.stdout = io.StringIO()\nprint(json.dumps(ast2json(ast.parse("` + code.replace(/\r\n/g,'\n').replace(/\n/g, '\\n').replace(/\"/g, `\'`) + `"))))\nsys.stdout.getvalue()`);
     console.log(astOut);
 
     // verify the ast
