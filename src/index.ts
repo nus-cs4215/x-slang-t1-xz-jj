@@ -284,7 +284,9 @@ export async function runInContext(
 
     // verify the ast
     console.log("=== AST VERIFY ===");
-    var verifyOut = parse_python(astOut, {'source_chapter':'0'});
+    console.log("variant: " + String(context.variant));
+    
+    var verifyOut = parse_python(astOut, {'source_chapter': String(context.variant)});
     console.log(verifyOut);
     console.log(typeof(verifyOut));
     
