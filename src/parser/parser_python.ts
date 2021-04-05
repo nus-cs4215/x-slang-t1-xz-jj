@@ -29,7 +29,7 @@ const rules = { '0' :
                     'USub':false,           'Eq':true,           'NotEq':true,        'Lt':true,
                     'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
                     'IsNot':false,          'In':false,           'NotIn':false}, 
-                'source1' : 
+                '1' : 
                 {'Module':true,         'Interactive':false,  'Expression':false,
                 'FunctionType':false, 'FunctionDef':true,  'AsyncFunctionDef':false,
                 'ClassDef':false,       'Return':true,       'Delete':false,       'Assign':true,
@@ -53,7 +53,7 @@ const rules = { '0' :
                 'USub':false,           'Eq':true,           'NotEq':true,        'Lt':true,
                 'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
                 'IsNot':false,          'In':false,           'NotIn':false},  
-                'source2' : 
+                '2' : 
                     {'Module':false,         'Interactive':false,  'Expression':false,
                     'FunctionType':false, 'FunctionDef':false,  'AsyncFunctionDef':false,
                     'ClassDef':false,       'Return':false,       'Delete':false,       'Assign':false,
@@ -77,7 +77,7 @@ const rules = { '0' :
                     'USub':false,           'Eq':false,           'NotEq':false,        'Lt':false,
                     'LtE':false,            'Gt':false,           'GtE':false,          'Is':false,
                     'IsNot':false,          'In':false,           'NotIn':false}, 
-                'source3' : 
+                '3' : 
                     {'Module':false,         'Interactive':false,  'Expression':false,
                     'FunctionType':false, 'FunctionDef':false,  'AsyncFunctionDef':false,
                     'ClassDef':false,       'Return':false,       'Delete':false,       'Assign':false,
