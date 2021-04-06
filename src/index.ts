@@ -263,19 +263,19 @@ export async function runInContext(
     console.log(code);
 
     // verify the syntax with Antlr4
-    const syntaxErrors = verify_syntax(code.replace(/\r\n/g,'\n').replace(/\"/g, `\'`));
-    if(syntaxErrors.length >0) {
-      // there are errors
-      console.log("there are syntax errors!")
-      const result = "";
-      // for(var index in syntaxErrors) {
-      //   result = result.concat(syntaxErrors[index] + "\n");
-      // }
+    // const syntaxErrors = verify_syntax(code.replace(/\r\n/g,'\n').replace(/\"/g, `\'`));
+    // if(syntaxErrors.length >0) {
+    //   // there are errors
+    //   console.log("there are syntax errors!")
+    //   const result = "";
+    //   // for(var index in syntaxErrors) {
+    //   //   result = result.concat(syntaxErrors[index] + "\n");
+    //   // }
 
-      return new Promise((resolve, reject) => {
-        resolve({ status: 'finished', context, value: syntaxErrors[0] });
-      })
-    }
+    //   return new Promise((resolve, reject) => {
+    //     resolve({ status: 'finished', context, value: syntaxErrors[0] });
+    //   })
+    // }
   
     // get the ast
     console.log("=== AST ===");
