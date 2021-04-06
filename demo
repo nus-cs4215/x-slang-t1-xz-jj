@@ -1,0 +1,76 @@
+##### Introduction: #####
+## Show outputs of antlr/parser/pyodide
+
+## antlr4 error message
+# This is an example of invalid syntax
+# Expect: line 1, col 11: no viable alternative at input 'example'
+
+## parser error message
+def forbidden:
+    for _ in range(10000000000):
+        print(“Luckily I’m Forbiden”)
+
+## pyodide error message
+“This is invalid: ” + 1/0
+
+
+##### Chapter 0 #####
+## Your vanilla run-in-the-mill "calc" language
+1+1
+True or False or False and not True
+
+
+##### Chapter 1 #####
+# - added imports
+# - added function declaration
+# - added function calls
+# - added declaration/ assignments
+# - added return assignments
+# - added conditional expressions
+# - added if-else statements
+
+def lab():
+    marks = 100 if True else 99
+    return marks
+lab()
+
+##### Chapter 2 #####
+# - added lists
+
+a = ["horse", "hippo", "hedgehog", "hammerhead"]
+a[::-1]
+
+# Chapter 3
+# - added loops, i.e., for, while
+# - added continue, break
+
+for easy_as in [1,2,3]:
+  print("thunks")
+
+
+def f(n):
+  dp = [-1 for i in range(n+1)]
+  dp[0] = 1
+  dp[1] = 1
+  i = 2
+  while i <= n:
+    dp[i] = i*dp[i-1]
+    i+=1
+  return dp[n]
+f(5)
+
+
+# Chapter 4
+# - added dictionaries
+# - added error handling
+# - added tuple
+
+{n:n*n for n in [1,2,3,4]}
+
+try:
+    1/0
+except:
+    print("Ein Fehler wurde erkannt")
+
+
+

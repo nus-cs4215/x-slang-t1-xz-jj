@@ -43,7 +43,7 @@ const rules = { '0' :
                     'IfExp':true,          'Dict':false,         'Set':false,          'ListComp':false,
                     'SetComp':false,        'DictComp':false,     'GeneratorExp':false, 'Await':false,
                     'Yield':false,          'YieldFrom':false,    'Compare':true,      'Call':true,
-                    'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':false,
+                    'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':true,
                     'Subscript':false,      'Starred':false,      'Name':true,         'List':false,
                     'Tuple':false,          'Slice':false,        'attributes':false,   'Load':true,
                     'Store':true,          'Del':true,          'And':true,          'Or':true,
@@ -53,12 +53,12 @@ const rules = { '0' :
                     'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':true,
                     'USub':true,           'Eq':true,           'NotEq':true,        'Lt':true,
                     'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
-                    'IsNot':false,          'In':false,           'NotIn':false},  
+                    'IsNot':false,          'In':false,           'NotIn':false, 'alias': true},  
                 '2' : 
                 {'Module':true,         'Interactive':false,  'Expression':false,
                 'FunctionType':false, 'FunctionDef':true,  'AsyncFunctionDef':false,
                 'ClassDef':false,       'Return':true,       'Delete':false,       'Assign':true,
-                'AugAssign':false,      'AnnAssign':false,    'For':false,          'AsyncFor':false,
+                'AugAssign':true,      'AnnAssign':false,    'For':false,          'AsyncFor':false,
                 'While':false,          'If':true,           'With':false,         'AsyncWith':false,
                 'Raise':false,          'Try':false,          'Assert':false,       'Import':true,
                 'ImportFrom':true,     'Global':false,       'Nonlocal':false,     'Expr':true,
@@ -67,7 +67,7 @@ const rules = { '0' :
                 'IfExp':true,          'Dict':false,         'Set':false,          'ListComp':false,
                 'SetComp':false,        'DictComp':false,     'GeneratorExp':false, 'Await':false,
                 'Yield':false,          'YieldFrom':false,    'Compare':true,      'Call':true,
-                'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':false,
+                'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':true,
                 'Subscript':true,      'Starred':false,      'Name':true,         'List':true,
                 'Tuple':false,          'Slice':true,        'attributes':false,   'Load':true,
                 'Store':true,          'Del':true,          'And':true,          'Or':true,
@@ -77,12 +77,12 @@ const rules = { '0' :
                 'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':true,
                 'USub':true,           'Eq':true,           'NotEq':true,        'Lt':true,
                 'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
-                'IsNot':false,          'In':true,           'NotIn':true}, 
+                'IsNot':false,          'In':true,           'NotIn':true, 'alias': true}, 
                 '3' : 
                 {'Module':true,         'Interactive':false,  'Expression':false,
                 'FunctionType':false, 'FunctionDef':true,  'AsyncFunctionDef':false,
                 'ClassDef':false,       'Return':true,       'Delete':false,       'Assign':true,
-                'AugAssign':false,      'AnnAssign':false,    'For':true,          'AsyncFor':false,
+                'AugAssign':true,      'AnnAssign':false,    'For':true,          'AsyncFor':false,
                 'While':true,          'If':true,           'With':false,         'AsyncWith':false,
                 'Raise':false,          'Try':false,          'Assert':false,       'Import':true,
                 'ImportFrom':true,     'Global':false,       'Nonlocal':false,     'Expr':true,
@@ -91,7 +91,7 @@ const rules = { '0' :
                 'IfExp':true,          'Dict':false,         'Set':false,          'ListComp':true,
                 'SetComp':false,        'DictComp':false,     'GeneratorExp':false, 'Await':false,
                 'Yield':false,          'YieldFrom':false,    'Compare':true,      'Call':true,
-                'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':false,
+                'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':true,
                 'Subscript':true,      'Starred':false,      'Name':true,         'List':true,
                 'Tuple':false,          'Slice':true,        'attributes':false,   'Load':true,
                 'Store':true,          'Del':true,          'And':true,          'Or':true,
@@ -101,23 +101,23 @@ const rules = { '0' :
                 'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':true,
                 'USub':true,           'Eq':true,           'NotEq':true,        'Lt':true,
                 'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
-                'IsNot':false,          'In':true,           'NotIn':true},
+                'IsNot':false,          'In':true,           'NotIn':true, 'alias': true},
                 '4' : 
                 {'Module':true,         'Interactive':false,  'Expression':false,
                 'FunctionType':false, 'FunctionDef':true,  'AsyncFunctionDef':false,
                 'ClassDef':false,       'Return':true,       'Delete':false,       'Assign':true,
-                'AugAssign':false,      'AnnAssign':false,    'For':true,          'AsyncFor':false,
+                'AugAssign':true,      'AnnAssign':false,    'For':true,          'AsyncFor':false,
                 'While':true,          'If':true,           'With':false,         'AsyncWith':false,
                 'Raise':true,          'Try':true,          'Assert':true,       'Import':true,
                 'ImportFrom':true,     'Global':false,       'Nonlocal':false,     'Expr':true,
                 'Pass':true,           'Break':true,        'Continue':true,     'BoolOp':true,
                 'NamedExpr':false,      'BinOp':true,        'UnaryOp':true,      'Lambda':true,
                 'IfExp':true,          'Dict':true,         'Set':false,          'ListComp':true,
-                'SetComp':false,        'DictComp':true,     'GeneratorExp':false, 'Await':false,
+                'SetComp':true,        'DictComp':true,     'GeneratorExp':false, 'Await':false,
                 'Yield':false,          'YieldFrom':false,    'Compare':true,      'Call':true,
-                'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':false,
+                'FormattedValue':false, 'JoinedStr':false,    'Constant':true,     'Attribute':true,
                 'Subscript':true,      'Starred':false,      'Name':true,         'List':true,
-                'Tuple':false,          'Slice':true,        'attributes':false,   'Load':true,
+                'Tuple':true,          'Slice':true,        'attributes':false,   'Load':true,
                 'Store':true,          'Del':true,          'And':true,          'Or':true,
                 'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
                 'Div':true,            'Mod':true,          'Pow':false,          'LShift':false,
@@ -125,9 +125,10 @@ const rules = { '0' :
                 'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':true,
                 'USub':true,           'Eq':true,           'NotEq':true,        'Lt':true,
                 'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
-                'IsNot':false,          'In':true,           'NotIn':true} }
+                'IsNot':false,          'In':true,           'NotIn':true, 'alias': true } }
 
-                    
+
+
          
 // templating..
 const mods = ['Module', 'Interactive', 'Expression', 'Interactive', 'Expression','FunctionType']
@@ -262,7 +263,6 @@ function evaluate(component: JSON, context:object):any{
             not_implement(component, context);
 }
 
-
 //Raise(expr? exc, expr? cause)
 function Raise_(component, context){
     // console.log("In Raise_")
@@ -353,11 +353,32 @@ function Lambda_(component, context){
     return results
 }
 
+//ListComp(expr elt, comprehension* generators)
+function ListComp_(component, context){
+    // console.log("In ListComp_")
+    if(!check_rules("ListComp", context['source_chapter']))
+        return [{status:"no", msg:"ListComp not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+    
+    //generators
+    var generators = component['generators']
+    for(idx in generators){
+        var expr_ = generators[idx]
+        results = results.concat(evaluate(expr_, context))
+    }
+
+    //elt
+    var elt = component['elt']
+    results = results.concat(evaluate(elt, context))
+
+    return results
+}
+
 //comprehension = (expr target, expr iter, expr* ifs, int is_async)
 function comprehension_(component, context){
     // console.log("In comprehension_")
-    if(!check_rules("comprehension", context['source_chapter']))
-        return [{status:"no", msg:"comprehension not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    // if(!check_rules("comprehension", context['source_chapter']))
+    //     return [{status:"no", msg:"comprehension not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
     var results=[]
     
     //ifs
@@ -556,8 +577,8 @@ function Dict_(component:JSON, context:object) {
 //ExceptHandler(expr? type, identifier? name, stmt* body)
 //                  attributes (int lineno, int col_offset, int? end_lineno, int? end_col_offset)
 function ExceptHandler_(component, context){
-    if(!check_rules("ExceptHandler", context['source_chapter']))
-        return [{status:"no", msg:"ExceptHandler not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    // if(!check_rules("ExceptHandler", context['source_chapter']))
+    //     return [{status:"no", msg:"ExceptHandler not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
 
     // console.log("In ExceptHandler_")
     var results=[]
