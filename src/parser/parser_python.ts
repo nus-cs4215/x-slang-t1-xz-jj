@@ -48,7 +48,7 @@ const rules = { '0' :
                     'Tuple':false,          'Slice':false,        'attributes':false,   'Load':true,
                     'Store':true,          'Del':true,          'And':true,          'Or':true,
                     'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
-                    'Div':true,            'Mod':false,          'Pow':false,          'LShift':false,
+                    'Div':true,            'Mod':true,          'Pow':false,          'LShift':false,
                     'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
                     'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':true,
                     'USub':true,           'Eq':true,           'NotEq':true,        'Lt':true,
@@ -72,7 +72,7 @@ const rules = { '0' :
                 'Tuple':false,          'Slice':true,        'attributes':false,   'Load':true,
                 'Store':true,          'Del':true,          'And':true,          'Or':true,
                 'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
-                'Div':true,            'Mod':false,          'Pow':false,          'LShift':false,
+                'Div':true,            'Mod':true,          'Pow':false,          'LShift':false,
                 'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
                 'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':true,
                 'USub':true,           'Eq':true,           'NotEq':true,        'Lt':true,
@@ -96,7 +96,7 @@ const rules = { '0' :
                 'Tuple':false,          'Slice':true,        'attributes':false,   'Load':true,
                 'Store':true,          'Del':true,          'And':true,          'Or':true,
                 'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
-                'Div':true,            'Mod':false,          'Pow':false,          'LShift':false,
+                'Div':true,            'Mod':true,          'Pow':false,          'LShift':false,
                 'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
                 'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':true,
                 'USub':true,           'Eq':true,           'NotEq':true,        'Lt':true,
@@ -120,7 +120,7 @@ const rules = { '0' :
                 'Tuple':false,          'Slice':true,        'attributes':false,   'Load':true,
                 'Store':true,          'Del':true,          'And':true,          'Or':true,
                 'Add':true,            'Sub':true,          'Mult':true,         'MatMult':false,
-                'Div':true,            'Mod':false,          'Pow':false,          'LShift':false,
+                'Div':true,            'Mod':true,          'Pow':false,          'LShift':false,
                 'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
                 'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':true,
                 'USub':true,           'Eq':true,           'NotEq':true,        'Lt':true,
@@ -254,13 +254,368 @@ function evaluate(component: JSON, context:object):any{
             is_arguments(component)?arguments_(component, context):
             is_arg(component)?arg_(component, context):
             is_comprehension(component)?comprehension_(component, context):
-            is_excepthandler(component)?excepthandler_(component, context):
+            is_ExceptHandler(component)?ExceptHandler_(component, context):
             is_keyword(component)?keyword_(component, context):
             is_alias(component)?alias_(component, context):
             is_withitem(component)?withitem_(component, context):
             is_type_ignore(component)?type_ignore_(component, context):
             not_implement(component, context);
 }
+
+
+//Raise(expr? exc, expr? cause)
+function Raise_(component, context){
+    // console.log("In Raise_")
+    if(!check_rules("Raise", context['source_chapter']))
+        return [{status:"no", msg:"Raise not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+
+    //exc
+    var exc = component['exc']
+    if(exc!=null)
+        results = results.concat(evaluate(exc, context))
+
+    //cause
+    var cause = component['cause']
+    if(cause!=null)
+        results = results.concat(evaluate(cause, context))
+
+    return results
+}
+
+
+//Assert(expr test, expr? msg)
+function Assert_(component, context){
+    
+    // console.log("In Assert_" + context)
+    if(!check_rules("Assert", context['source_chapter']))
+        return [{status:"no", msg:"Assert not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+
+    //test
+    var test = component['test']
+    if(test!=null)
+        results = results.concat(evaluate(test, context))
+
+    //msg
+    var msg = component['msg']
+    if(msg!=null)
+        results = results.concat(evaluate(msg, context))
+
+    return results
+}
+
+//Import(alias* names)
+//primitive datatype
+
+//ImportFrom(identifier? module, alias* names, int? level)
+function ImportFrom_(component, context){
+    // console.log("In ImportFrom_")
+    if(!check_rules("ImportFrom", context['source_chapter']))
+        return [{status:"no", msg:"ImportFrom not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+    
+    //names
+    var names = component['names']
+    for(idx in names){
+        var alias = names[idx]
+        results = results.concat(evaluate(alias, context))
+    }
+
+    //module
+    var module = component['module']
+    if(module!=null)
+        results = results.concat(evaluate(module, context))
+
+    //level
+    var level = component['level']
+    if(level!=null)
+        results = results.concat(evaluate(level, context))
+
+    return results
+}
+
+//Lambda(arguments args, expr body)
+function Lambda_(component, context){
+    // console.log("In Lambda_")
+    if(!check_rules("Lambda", context['source_chapter']))
+        return [{status:"no", msg:"Lambda not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+
+    //args
+    var args = component['args']
+    results = results.concat(evaluate(args, context))
+
+    //body
+    var body = component['body']
+    results = results.concat(evaluate(body, context))
+
+    return results
+}
+
+//comprehension = (expr target, expr iter, expr* ifs, int is_async)
+function comprehension_(component, context){
+    // console.log("In comprehension_")
+    if(!check_rules("comprehension", context['source_chapter']))
+        return [{status:"no", msg:"comprehension not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+    
+    //ifs
+    var ifs = component['ifs']
+    for(idx in ifs){
+        var expr_ = ifs[idx]
+        results = results.concat(evaluate(expr_, context))
+    }
+
+    //target
+    var target = component['target']
+    results = results.concat(evaluate(target, context))
+
+    //iter
+    var iter = component['iter']
+    results = results.concat(evaluate(iter, context))
+
+    return results
+}
+
+
+//DictComp(expr key, expr value, comprehension* generators)
+function DictComp_(component, context){
+    // console.log("In DictComp_")
+    if(!check_rules("DictComp", context['source_chapter']))
+        return [{status:"no", msg:"DictComp not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+    
+    //generators
+    var generators = component['generators']
+    for(idx in generators){
+        var comprehension = generators[idx]
+        results = results.concat(evaluate(comprehension, context))
+    }
+
+    //key
+    var key = component['key']
+    results = results.concat(evaluate(key, context))
+
+    //value
+    var value = component['value']
+    results = results.concat(evaluate(value, context))
+
+    return results
+}
+
+//Subscript(expr value, expr slice, expr_context ctx)
+function Subscript_(component, context){
+    // console.log("In Subscript_")
+    if(!check_rules("Subscript", context['source_chapter']))
+        return [{status:"no", msg:"Subscript not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+
+
+    //value
+    var value = component['value']
+    results = results.concat(evaluate(value, context))
+
+    //ctx
+    var expr_context = component['ctx']
+    results = results.concat(evaluate(expr_context, context))
+
+    return results
+}
+
+//List(expr* elts, expr_context ctx)
+function List_(component, context){
+    // console.log("In List_")
+    if(!check_rules("List", context['source_chapter']))
+        return [{status:"no", msg:"List not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+    
+    //elts
+    var elts = component['elts']
+    for(idx in elts){
+        var elt = elts[idx]
+        results = results.concat(evaluate(elt, context))
+    }
+
+    //ctx
+    var expr_context = component['ctx']
+    results = results.concat(evaluate(expr_context, context))
+    return results
+}
+
+
+//Slice(expr? lower, expr? upper, expr? step)
+function Slice_(component, context){
+    // console.log("In Slice_")
+    if(!check_rules("Slice", context['source_chapter']))
+        return [{status:"no", msg:"Slice not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+    
+    //lower
+    var lower = component['lower']
+    if(lower != null)
+        results = results.concat(evaluate(lower, context))
+    
+    //upper
+    var upper = component['upper']
+    if(upper != null)
+        results = results.concat(evaluate(upper, context))
+
+    //step
+    var step = component['step']
+    if(step != null)
+        results = results.concat(evaluate(step, context))
+
+    return results
+}
+
+//While(expr test, stmt* body, stmt* orelse)
+function While_(component, context){
+    // console.log("In While_")
+    if(!check_rules("While", context['source_chapter']))
+        return [{status:"no", msg:"While not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+    
+    //test
+    var test = component['test']
+    if(test != null)
+        results = results.concat(evaluate(test, context))
+    
+    //body
+    var statements = component['body']
+    for(idx in statements){
+        var stmt = statements[idx]
+        results = results.concat(evaluate(stmt, context))
+    }
+
+    //orelse
+    var statements = component['orelse']
+    for(idx in statements){
+        var stmt = statements[idx]
+        results = results.concat(evaluate(stmt, context))
+    }
+    return results
+}
+
+
+//For(expr target, expr iter, stmt* body, stmt* orelse, string? type_comment)
+function For_(component, context){
+    if(!check_rules("For", context['source_chapter']))
+        return [{status:"no", msg:"For not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    // console.log("In For_")
+    var results=[]
+
+    //target
+    var target = component['target']
+    if(target != null)
+        results = results.concat(evaluate(target, context))
+    //iter
+    var iter = component['iter']
+    if(iter != null)
+        results = results.concat(evaluate(iter, context))
+
+    //body
+    var statements = component['body']
+    for(idx in statements){
+        var stmt = statements[idx]
+        results = results.concat(evaluate(stmt, context))
+    }
+
+    //orelse
+    var statements = component['orelse']
+    for(idx in statements){
+        var stmt = statements[idx]
+        results = results.concat(evaluate(stmt, context))
+    }
+    return results
+}
+
+// Dict_(expr* keys, expr* values)
+function Dict_(component:JSON, context:object) {
+    if(!check_rules("Dict", context['source_chapter']))
+        return [{status:"no", msg:"Dict not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+    //keys
+    var keys = component['keys']
+    for(idx in keys){
+        var key = keys[idx]
+        results = results.concat(key, context)
+    }
+    //values
+    var values = component['values']
+    for(idx in values){
+        var value = values[idx]
+        results = results.concat(value, context)
+    }
+    return results
+}
+    
+
+
+
+//ExceptHandler(expr? type, identifier? name, stmt* body)
+//                  attributes (int lineno, int col_offset, int? end_lineno, int? end_col_offset)
+function ExceptHandler_(component, context){
+    if(!check_rules("ExceptHandler", context['source_chapter']))
+        return [{status:"no", msg:"ExceptHandler not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+
+    // console.log("In ExceptHandler_")
+    var results=[]
+
+    var type = component['type']
+    if(type != null)
+        results = results.concat(evaluate(type, context))
+    
+    var statements = component['body']
+    for(idx in statements){
+        var stmt = statements[idx]
+        results = results.concat(evaluate(stmt, context))
+    }
+
+    return results
+}
+
+
+
+
+
+//Try(stmt* body, excepthandler* handlers, stmt* orelse, stmt* finalbody)
+function Try_(component:JSON, context:object){
+    if(!check_rules("Try", context['source_chapter']))
+        return [{status:"no", msg:"Try not allowed.. yet", "col_offset": component['col_offset'], "lineno": component['lineno']}]
+    var results=[]
+    
+    //body
+    var statements = component['body']
+    for(idx in statements){
+        var stmt = statements[idx]
+        results = results.concat(evaluate(stmt, context))
+    }
+    //handlers
+    var handlers = component['handlers']
+    results = results.concat(evaluate(handlers, context))
+    
+    for(idx in statements){
+        var stmt = statements[idx]
+        results = results.concat(evaluate(stmt, context))
+    }
+
+    var statements = component['orelse']
+    for(idx in statements){
+        var stmt = statements[idx]
+        results = results.concat(evaluate(stm, context))
+    }
+
+    var statements = component['finalbody']
+    for(idx in statements){
+        var stmt = statements[idx]
+        results = results.concat(stmt, context)
+    }    
+
+    return results
+
+}
+
 
 function Module_(component:JSON, context:object){
     // console.log("In Module_")
