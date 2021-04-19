@@ -20,8 +20,7 @@ To add \"x-slang\" to your PATH, build it as per the above
 instructions, then run
 
 ``` {.}
-$ cd dist
-$ npm link # yarn link instead?
+$ yarn link
 ```
 
 If you do not wish to add \"x-slang\" to your PATH, replace
