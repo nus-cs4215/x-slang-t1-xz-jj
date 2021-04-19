@@ -1,0 +1,53 @@
+\section*{SICPy \S0}
+\begin{alignat*}{9}
+&& \textit{module}       &&\quad ::= &\quad && \textit{statement} \ \ldots 
+                                                            && \textrm{statement sequence} \\[1mm]
+% && \textit{program}      &&\quad ::= &\quad && \textit{statement} \ \ldots
+%                                                           && \textrm{statement sequence} \\[1mm]
+% && \textit{statement}    &&\quad ::= &\quad && \textbf{\texttt{function}}\  \textit{name} \ 
+%                                   \textbf{\texttt{(}}\  \textit{parameters} \ \textbf{\texttt{)}}\ \textit{block} \quad
+%                                                           && \textrm{function declaration}\\
+&& \textit{statement}    &&\quad ::= &\quad &&  \textit{expression} \ %\textbf{\texttt{;}}
+                                                           && \textrm{expression statement} \\[1mm]
+% && \textit{parameters}   && ::= &\quad &&  \epsilon\ | \  \textit{name} \ 
+%                                                   (\ \textbf{\texttt{,}} \ \textit{name}\ )\ \ldots
+%                                                             && \textrm{function parameters}   \\[1mm]
+% && \textit{block}        && ::= &      && \textbf{\texttt{\{}}\  \textbf{\texttt{return}}\ \textit{expression}   \ \textbf{\texttt{\}}} \quad
+%                                                           && \textrm{function body}\\[1mm]         
+&& \textit{expression}   && ::= &\quad &&  \textit{number}   && \textrm{primitive number expression}\\
+&&                       && |   &\quad && \textbf{\texttt{True}}\ |\ \textbf{\texttt{False}}
+                                                           && \textrm{primitive boolean expression}\\
+&&                       && |   &\quad &&  \textit{string}   && \textrm{primitive string expression}\\
+% &&                       && |   &\quad &&  \textit{name}   && \textrm{name expression}\\
+&&                       && |   &\quad &&  \textit{expression} \  \textit{binary-operator} \ 
+                                            \textit{expression} \qquad
+                                                           && \textrm{binary operator combination}\\
+&&                       && |   &\quad &&   \textit{unary-operator} \ 
+                                            \textit{expression}
+                                                           && \textrm{unary operator combination}\\
+% &&                       && |   &\quad &&   \textit{expression} \ 
+%                                             \textbf{\texttt{(}}\ \textit{expressions}\
+%                                             \textbf{\texttt{)}}
+%                                                           && \textrm{function application}\\
+% &&                       && |   &\quad &&   \textit{expression} \ \textbf{\texttt{?}}\ 
+%                                             \textit{expression}
+%                                             \ \textbf{\texttt{:}}\
+%                                             \textit{expression}\
+%                                                           && \textrm{conditional expression}\\
+&&                       && |   &\quad &&  \textbf{\texttt{(}}\  \textit{expression} \ 
+                                            \textbf{\texttt{)}} && \textrm{parenthesised expression}\\[1mm]
+&& \textit{binary-operator}    \ 
+                        && ::= &\quad && \textbf{\texttt{+}}\ |\ \textbf{\texttt{-}}\ |\ \textbf{\texttt{*}}\ |\ \textbf{\texttt{/}}\ |\ \textbf{\texttt{\%}}\ |\ 
+                                   \textbf{\texttt{==}}\ \\ %|\ \textbf{\texttt{!==}}\ \\
+&&                       && |  &\quad &&  \texttt{\textbf{>}}\ |\ \texttt{\textbf{<}}\ |\ \texttt{\textbf{>=}}\ |\ \texttt{\textbf{<=}}\
+                                          |\ \textbf{\texttt{and}}\ |\ \texttt{\textbf{or}}\  \\[1mm]
+&& \textit{unary-operator}    
+                        && ::= &\quad && \textbf{\texttt{not}}\ |\ \textbf{\texttt{+}}\ |\ \textbf{\texttt{-}} \\[1mm]
+% && \textit{expressions}  && ::= &\quad && \epsilon\ | \ \textit{expression}\ (
+%                                                               \ \textbf{\texttt{,}} \
+%                                                                  \textit{expression} \ 
+%                                                                       )\ \ldots
+%                                                             && \textrm{argument expressions} 
+\end{alignat*}
+
+\newpage

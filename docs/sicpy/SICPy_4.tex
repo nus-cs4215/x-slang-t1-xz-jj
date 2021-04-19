@@ -1,0 +1,145 @@
+\section*{SICPy \S4}
+
+\begin{alignat*}{9}
+&& \textit{module}    &&\quad ::= &\quad && \textit{statement} \ \ldots
+                                                           && \textrm{{statement sequence}} \\[1mm]
+&& \textit{statement}    &&\quad ::= &\quad && \textit{name} \ \textbf{\texttt{=}}\  \textit{expression} \
+                                                           && \textrm{single assignment} \\
+&&                       && |   &\quad && \textit{name} \ [ \ \textbf{\texttt{,}} \ \textit{name} \ ] \ \ldots \
+\textbf{\texttt{=}}\ \textit{expression} \ && \textrm{tuple assignment} \\            
+&&                       && |   &\quad && \textit{function} \quad
+                                                           && \textrm{function declaration}\\
+&&                       && |   &\quad && \textbf{\texttt{\underline{return}}}\  \textit{expression} \
+                                                           && \textrm{return statement}\\
+&&                       && |   &\quad && \textit{if-statement} \quad
+                                                           && \textrm{conditional statement}\\
+&&                       && |   &\quad && \textit{while-statement} \quad
+                                                           && \textrm{while statement}\\
+&&                       && |   &\quad && \textit{for-statement} \quad
+                                                           && \textrm{for statement}\\
+&&                       && |   &\quad && \textit{try-statement} \quad
+                                                           && \textrm{try statement}\\                            
+&&                       && |   &\quad &&  \textit{expression} \ 
+                                                           && \textrm{expression statement} \\
+&&                       && |   &\quad && \textbf{\texttt{\underline{break}}} \ | \ \textbf{\texttt{\underline{pass}}} \ | \ \textbf{\texttt{\underline{continue}}} \ \quad &&  \\[1mm]
+&& \textit{function} && ::=&\quad && \textbf{\texttt{\underline{def}}}\  \textit{name} \ 
+                                %   \textbf{\texttt{(}}\  \textit{parameters} \ \textbf{\texttt{)}} \ \textbf{\texttt{:}} \ \textit{block} \quad
+                                   \textbf{\texttt{(}}\  \textit{parameters} \ \textbf{\texttt{)}} \
+                                   \textbf{\texttt{:}} \ \quad
+                                                           && \\         
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
+                                                           && \textrm{function declaration}\\                                                           
+&& \textit{parameters}   && ::= &\quad &&  \epsilon\ | \  \textit{name} \ 
+                                                   [\ \textbf{\texttt{,}} \ \textit{name}\ ]\ \ldots
+                                                            && \textrm{function parameters}   \\[1mm]
+&& \textit{if-statement} && ::= &\quad &&  \textbf{\texttt{\underline{if}}}\ \textit{expression} \ 
+                                           \textbf{\texttt{:}}  \\
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
+                                                           &&  \\  
+&&                       &&     &      [&& \textbf{\texttt{\underline{elif}}} \ \textit{expression} \
+                                          \textbf{\texttt{:}} \\ 
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
+                                                           &&  \\
+&&                       &&     &      [&& \textbf{\texttt{\underline{elif}}} \ \textit{expression} \
+                                          \textbf{\texttt{:}} \\ 
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad ] \ \ldots \quad 
+                                                           &&  \\     
+&&                       &&     &      && \textbf{\texttt{\underline{else}}}\
+                                          \textbf{\texttt{:}} \\
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad ]
+                                                           && \textrm{conditional statement}  \\[1mm]
+&& \textit{while-statement} && ::= &\quad &&  \textbf{\texttt{\underline{while}}}\ \textit{expression} \ 
+                                           \textbf{\texttt{:}}  \\
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
+                                                           &&  \textrm{while statement} \\[1mm]
+&& \textit{for-statement} && ::= &\quad &&  \textbf{\texttt{\underline{for}}}\ \textit{expression} \ 
+                                           \textbf{\texttt{\underline{in}}}\ \textit{expression} \ \textbf{\texttt{:}}  \\
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
+                                                           &&  \textrm{for statement} \\[1mm]
+&& \textit{try-statement} && ::= &\quad &&  \textbf{\texttt{\underline{try}}}\                      
+\textbf{\texttt{:}}  \\
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
+                                                           &&  \\[1mm]
+&&                       &&     &\quad &&  \textbf{\texttt{\underline{except}}}\ \textit{expression} \ 
+                                            \textbf{\texttt{:}}  \\
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
+                                                           &&  \textrm{try statement} \\[1mm]
+&& \textit{expression}   && ::= &\quad &&  \textit{number}   && \textrm{primitive number expression}\\
+&&                       && |   &\quad && \textbf{\texttt{\underline{True}}}\ |\ \textbf{\texttt{\underline{False}}}
+                                                           && \textrm{primitive boolean expression}\\
+&&                       && |   &\quad &&  \textbf{\texttt{\underline{None}}} \   && \textrm{primitive list expression}\\
+&&                       && |   &\quad &&  \textit{string}   && \textrm{primitive string expression}\\
+&&                       && |   &\quad &&  \textit{name}   && \textrm{name expression}\\
+&&                       && |   &\quad &&  \textit{expression} \  \textit{binary-operator} \ 
+                                            \textit{expression} \qquad
+                                                           && \textrm{binary operator combination}\\
+&&                       && |   &\quad &&   \textit{unary-operator} \ 
+                                            \textit{expression}
+                                                           && \textrm{unary operator combination}\\
+&&                       && |   &\quad &&   \textit{expression} \ 
+                                            \textbf{\texttt{(}}\ \textit{expressions}\
+                                            \textbf{\texttt{)}}
+                                                           && \textrm{function application}\\
+% &&                       && |   &\quad &&   \ \textit{name}\ | \
+%                                               \textbf{\texttt{(}}\ \textit{parameters}\ \textbf{\texttt{)}}\
+&&                       && |   &\quad &&   \textbf{\texttt{\underline{lambda}}} \ 
+                                            % (\ \textit{name}\ | \
+                                            %   \textbf{\texttt{(}}\ \textit{parameters}\ \textbf{\texttt{)}}\
+                                            % )\                      
+                                            \textit{name} \ 
+                                                   [\ \textbf{\texttt{,}} \ \textit{name}\ ]\ \ldots
+                                            \texttt{\textbf{:}}\ \textit{expression}
+                                                           && \textrm{lambda expression}\\
+% &&                       && |   &\quad &&   \textit{expression} \ \textbf{\texttt{?}}\ 
+%                                             \textit{expression}
+%                                             \ \textbf{\texttt{:}}\
+%                                             \textit{expression}\
+%                                                           && \textrm{conditional expression}\\
+&&                       && |   &\quad &&   \textit{expression} \ 
+                                            \textbf{\texttt{\underline{if}}} \ \textit{expression} \ 
+                                            \textbf{\texttt{\underline{else}}} \ \textit{expression} \ 
+                                                           && \textrm{conditional expression}\\
+&&                       && |   &\quad &&   \textit{list-expression} && \textrm{list expression} \\
+% &&                       && |   &\quad &&   \textit{dictionary-expression} && \textrm{dictionary expression} \\
+&&                       && |   &\quad &&   \textbf{\texttt{\{}} \ \textit{expression} \ \textbf{\texttt{:}} \ 
+                                            \textit{expression} \  [\ \textbf{\texttt{,}} \ 
+                                            \textit{expression} \ \textbf{\texttt{:}} \ 
+                                            \textit{expression} \ ]\ \ldots \ \textbf{\texttt{\}}}
+                                            && \textrm{literal dict expression}\\
+&&                       && |   &\quad &&   \textbf{\texttt{(}}\  \textit{tuple-expression} \ \textbf{\texttt{)}}
+                                                           && \textrm{tuple expression}\\
+&&                       && |   &\quad &&   \textit{expression} \ 
+                                            \textbf{\texttt{[}}\ \textit{expression}\
+                                            \textbf{\texttt{]}} && \textrm{list/ dictionary access}\\
+% &&                       && |   &\quad &&   \textbf{\texttt{[}}\ \textit{expressions}\
+%                                             \textbf{\texttt{]}}
+%                                                           && \textrm{literal list expression}\\
+% &&                       && |   &\quad &&   \textbf{\texttt{[}}\ \textit{expression} \     \textbf{\texttt{\underline{for}}} \ \textit{expression} \ \textbf{\texttt{\underline{in}}} \
+%                                             \textit{expression} \ [ \ \textbf{\texttt{if}} \ \textit{expression} \ ]  \ \textbf{\texttt{]}} \ && \textrm{list comprehension expression}\\
+&&                       && |   &\quad &&  \textbf{\texttt{(}}\  \textit{expression} \ 
+                                            \textbf{\texttt{)}} && \textrm{parenthesised expression}\\[1mm]
+&& \textit{list-expression}   && ::= &\quad &&   \textbf{\texttt{[}}\ \textit{expressions}\
+                                            \textbf{\texttt{]}}
+                                                           && \textrm{literal list expression}\\
+&&                       && |   &\quad &&   \textbf{\texttt{[}}\ \textit{expression} \     \textbf{\texttt{\underline{for}}} \ \textit{expression} \ \textbf{\texttt{\underline{in}}} \
+                                            \textit{expression} \ [ \ \textbf{\texttt{if}} \ \textit{expression} \ ]  \ \textbf{\texttt{]}} \ && \textrm{list comprehension expression}\\[1mm]
+% && \textit{dictionary-expression}   && ::= &\quad &&   
+%                                             \textbf{\texttt{\{}} \ \textit{expression} \ \textbf{\texttt{:}} \ \textit{expression} \  [\ \textbf{\texttt{,}} \ \textit{expression} \ \textbf{\texttt{:}} \ \textit{expression} \ ]\ \ldots \ \textbf{\texttt{\}}}
+%                                             && \textrm{literal dict expression}\\[1mm]      
+&& \textit{tuple-expression}   && ::= &\quad &&  \epsilon \ | \ \textit{expression} \ \textbf{\texttt{,}} \ \textit{expressions}  && \textit{tuple expression}  \\[1mm]
+% &&                       && |   &\quad && \textit{expression} \ \textbf{\texttt{,}} \ \textit{expressions} &&  \\ [1mm]
+&& \textit{binary-operator}    \ 
+                        && ::= &\quad && \textbf{\texttt{+}}\ |\ \textbf{\texttt{-}}\ |\ \textbf{\texttt{*}}\ |\ \textbf{\texttt{/}}\ |\ \textbf{\texttt{\%}}\ |\ 
+                                   \textbf{\texttt{==}}\ \\ %|\ \textbf{\texttt{!==}}\ \\
+&&                       && |  &\quad &&  \texttt{\textbf{>}}\ |\ \texttt{\textbf{<}}\ |\ \texttt{\textbf{>=}}\ |\ \texttt{\textbf{<=}}\
+                                          |\ \textbf{\texttt{and}}\ |\ \texttt{\textbf{or}}\  \\[1mm]
+&& \textit{unary-operator}    
+                        && ::= &\quad && \textbf{\texttt{not}}\ |\ \textbf{\texttt{+}}\ |\ \textbf{\texttt{-}} \\[1mm]
+&& \textit{expressions}  && ::= &\quad && \epsilon\ | \ \textit{expression}\ [
+                                                               \ \textbf{\texttt{,}} \
+                                                                 \textit{expression} \ 
+                                                                      ]\ \ldots
+                                                            && \textrm{argument expressions}
+\end{alignat*}
+
+\newpage
