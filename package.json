@@ -1,7 +1,7 @@
 {
-  "name": "x-slang",
+  "name": "py-slang",
   "version": "0.4.70",
-  "description": "Javascript-based implementations of a simple calc language, written in Typescript",
+  "description": "SICPy is the adaptation of the Python programming language for SICP",
   "keywords": [
     "JavaScript",
     "interpreter",
@@ -10,7 +10,7 @@
     "SICP"
   ],
   "author": {
-    "name": "Source Academy",
+    "name": "SICPy Academy",
     "url": "https://github.com/source-academy/"
   },
   "dependencies": {
