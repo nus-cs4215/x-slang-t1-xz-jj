@@ -1,7 +1,7 @@
-Open-source implementations of the programming language *Source*. Source
-is a series of small subsets of JavaScript, designed for teaching
+Open-source implementations of the programming language *SICPy*. SICPy
+is a series of small subsets of Python, designed for teaching
 university-level programming courses for computer science majors,
-following Structure and Interpretation of Computer Programs, JavaScript
+approximating/ following Structure and Interpretation of Computer Programs, JavaScript
 Adaptation (<https://sicp.comp.nus.edu.sg>).
 
 Usage
