@@ -26,7 +26,7 @@ $ yarn link
 If you do not wish to add \"x-slang\" to your PATH, replace
 \"x-slang\" with \"node dist/repl/repl.js\" in the following examples.
 
-To try out *Source* in a REPL, run
+To try out *SICPy* in a REPL, run
 
 ``` {.}
 $ x-slang '1 * 1'
@@ -42,7 +42,7 @@ $ x-slang "$(< my_source_program.js)"
 Documentation
 =============
 
-Source is documented here: <https://sicp.comp.nus.edu.sg/source/>
+SICPy is documented here: <https://sicp.comp.nus.edu.sg/source/>
 
 Testing
 =======
@@ -73,13 +73,13 @@ Please remember to write test cases to reflect your added
 functionalities. The god of this repository is self-professed to be very
 particular about test cases.
 
-Using your x-slang in local Source Academy
+Using your x-slang in local SICPy Academy
 ===========================================
 
 A common issue when developing modifications to x-slang is how to test
 it using your own local frontend. Assume that you have built your own
 x-frontend locally, here is how you can make it use your own
-x-slang, instead of the one that the Source Academy team has deployed
+x-slang, instead of the one that the SICPy Academy team has deployed
 to npm.
 
 First, build and link your local x-slang:
