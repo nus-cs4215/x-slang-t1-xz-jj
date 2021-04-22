@@ -36,11 +36,11 @@
                                            \textbf{\texttt{:}}  \\
 &&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
                                                            &&  \\  
-&&                       &&     &      [&& \textbf{\texttt{\underline{elif}}} \ \textit{expression} \
-                                          \textbf{\texttt{:}} \\ 
-&&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
-                                                           &&  \\
-&&                       &&     &      [&& \textbf{\texttt{\underline{elif}}} \ \textit{expression} \
+% &&                       &&     &      [&& \textbf{\texttt{\underline{elif}}} \ \textit{expression} \
+%                                           \textbf{\texttt{:}} \\ 
+% &&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
+%                                                           &&  \\
+&&                       &&     &      [[&& \textbf{\texttt{\underline{elif}}} \ \textit{expression} \
                                           \textbf{\texttt{:}} \\ 
 &&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad ] \ \ldots \quad 
                                                            &&  \\     
@@ -63,7 +63,11 @@
 &&                       &&     &\quad &&  \textbf{\texttt{\underline{except}}}\ \textit{expression} \ 
                                             \textbf{\texttt{:}}  \\
 &&                       &&     &\quad && \quad \textit{statement} \ \ldots \quad
-                                                           &&  \textrm{try statement} \\[1mm]
+                                                           &&  \\
+&&                       &&     [&\quad &&  \textbf{\texttt{\underline{except}}}\ \textit{expression} \ 
+                                            \textbf{\texttt{:}}  \\
+&&                       &&     &\quad && \quad \textit{statement} \ \ldots \ ] \ \ldots \quad
+                                                           &&  \textrm{try statement} \\[1mm]                                    
 && \textit{expression}   && ::= &\quad &&  \textit{number}   && \textrm{primitive number expression}\\
 &&                       && |   &\quad && \textbf{\texttt{\underline{True}}}\ |\ \textbf{\texttt{\underline{False}}}
                                                            && \textrm{primitive boolean expression}\\
