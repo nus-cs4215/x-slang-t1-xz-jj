@@ -124,7 +124,7 @@ const rules = { '0' :
                 'RShift':false,         'BitOr':false,        'BitXor':false,       'BitAnd':false,
                 'FloorDiv':false,       'Invert':false,       'Not':true,          'UAdd':true,
                 'USub':true,           'Eq':true,           'NotEq':true,        'Lt':true,
-                'LtE':true,            'Gt':true,           'GtE':true,          'Is':false,
+                'LtE':true,            'Gt':true,           'GtE':true,          'Is':true,
                 'IsNot':false,          'In':true,           'NotIn':true, 'alias': true } }
 
 
