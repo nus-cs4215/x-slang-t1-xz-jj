@@ -7,6 +7,7 @@ import { findDeclarationNode, findIdentifierNode } from './finder'
 import { parse } from './parser/parser'
 import { parse_python } from './parser/parser_python'
 import { verify_syntax } from './sicpy/syntax_verifier'
+import { inject_modules } from './sicpy/modules/module_inject'
 import {
   Error as ResultError,
   ExecutionMethod,
@@ -305,7 +306,11 @@ export async function runInContext(
         } 
       }
     }
+
+    // inject modules
+    const inject = pyodide.runPython(inject_modules({'source_chapter': String(context.variant)}));
     
+    // initialize IO
     const resOut0 = pyodide.runPython(`import sys\nimport io\nsys.stdout = io.StringIO()\n` + code + `\n`);
     const resOut1 = pyodide.runPython(`sys.stdout.getvalue()\n`);
   
