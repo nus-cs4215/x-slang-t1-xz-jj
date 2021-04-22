@@ -1,8 +1,7 @@
-Open-source implementations of the programming language *SICPy*. SICPy
-is a series of small subsets of Python, designed for teaching
-university-level programming courses for computer science majors,
-approximating/ following Structure and Interpretation of Computer Programs, JavaScript
-Adaptation (<https://sicp.comp.nus.edu.sg>).
+Introduction
+=====
+Open-source implementation of the programming language *SICPy*. SICPy is a series of sublanguages of Python, designed for teaching
+university-level programming courses for computer science majors. SICPy follows closely the pedagogy approaches of Structure and Interpretation of Computer Programs, JavaScript Adaptation (<https://sicp.comp.nus.edu.sg>).
 
 Usage
 =====
